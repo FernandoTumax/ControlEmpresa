@@ -51,7 +51,7 @@ var enterpriseController = {
     login: function (req, res) {
         var params = req.body;
 
-        if (params.username && params.password) {
+        if (params.username.toLowerCase() && params.password) {
             Admin.findOne({ username: params.username }, (err, adminFind) => {
                 if (err) {
                     res.status(500).send({
@@ -156,8 +156,8 @@ var enterpriseController = {
                                     message: "Esa empresa ya existe"
                                 })
                             } else {
-                                enterprise.name = params.name;
-                                enterprise.email = params.email;
+                                enterprise.name = params.name.toLowerCase();
+                                enterprise.email = params.email.toLowerCase();
                                 enterprise.phone = params.phone;
                                 enterprise.cantidadEmpleado = 0;
     
@@ -659,10 +659,10 @@ var enterpriseController = {
                     })
                 } else if (enterpriseFind) {
                     if (paramsEmployee.name && paramsEmployee.lastname && paramsEmployee.job && paramsEmployee.departament) {
-                        employee.name = paramsEmployee.name;
-                        employee.lastname = paramsEmployee.lastname;
-                        employee.job = paramsEmployee.job;
-                        employee.departament = paramsEmployee.departament;
+                        employee.name = paramsEmployee.name.toLowerCase();
+                        employee.lastname = paramsEmployee.lastname.toLowerCase();
+                        employee.job = paramsEmployee.job.toLowerCase();
+                        employee.departament = paramsEmployee.departament.toLowerCase();
 
                         Enterprise.findByIdAndUpdate(enterpriseId, { $push: { employees: employee } }, { new: true }, (err, enterpriseUpdate) => {
                             if (err) {
@@ -722,10 +722,10 @@ var enterpriseController = {
                             _id: enterpriseId,
                             'employees._id': employeeId
                         }, {
-                            'employees.$.name': update.name,
-                            'employees.$.lastname': update.lastname,
-                            'employees.$.job': update.job,
-                            'employees.$.departament': update.departament
+                            'employees.$.name': update.name.toLowerCase(),
+                            'employees.$.lastname': update.lastname.toLowerCase(),
+                            'employees.$.job': update.job.toLowerCase(),
+                            'employees.$.departament': update.departament.toLowerCase()
                         }, { new: true }, (err, employeeUpdate) => {
                             if (err) {
                                 res.status(500).send({
