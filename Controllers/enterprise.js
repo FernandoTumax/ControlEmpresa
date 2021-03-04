@@ -31,7 +31,7 @@ var enterpriseController = {
                             message: "Error al ecriptar la contraseña"
                         })
                     } else if (passwordHash) {
-                        admin.username = "admin",
+                        admin.username = "admin";
                             admin.password = passwordHash;
                         admin.save((err, adminSave) => {
                             if (err) {
@@ -631,7 +631,6 @@ var enterpriseController = {
                             employeesFound
                         })
                     } else {
-                        console.log("hola a todos");
                         res.status(200).send({
                             message: "No hay datos encontrados"
                         })
@@ -769,7 +768,7 @@ var enterpriseController = {
                 { $pull: { employees: { _id: employeeId } } }, { new: true }, (err, employeeRemove) => {
                     if (err) {
                         res.status(500).send({
-                            message: "Error al eliminar el documento embedido"
+                            message: "El id del empleado no existe"
                         })
                     } else if (employeeRemove) {
                         Enterprise.findByIdAndUpdate(enterpriseId, { $inc: { cantidadEmpleado: -1 } }, { new: true }, (err, enterpriseInc) => {
@@ -794,19 +793,3 @@ var enterpriseController = {
 };
 
 module.exports = enterpriseController;
-
-
-let empleadosEncontrados = [];
-
-empleadoFind.forEach(elemento=>{
-    Empleado.find({_id: elemento}).exec((err, empleadoEncontrado) => {
-        if(err){
-            console.log(err)
-        }else if(empleadosEncontrados){
-            console.log(empleadoEncontrado);
-            empleadosEncontrados.push(empleadoEncontrado);
-        }else{
-            console.log("hola");
-        }
-    })
-})

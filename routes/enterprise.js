@@ -16,7 +16,7 @@ api.post("/admin/:idA/saveEnterprise", mdAuth.ensureAuth, enterpriseController.s
 
 api.get('/admin/getEnterprises', enterpriseController.getEnterprises);
 
-api.post('/admin/getEnterprise/:id', enterpriseController.getEnterprise);
+api.get('/admin/getEnterprise/:id', enterpriseController.getEnterprise);
 
 api.put('/enterprise/updateEnterprise/:id', mdAuth.ensureAuth , enterpriseController.updateEnterprise);
 
@@ -38,7 +38,7 @@ api.get('/enterprise/:id/getEmployeeByDepartament', mdAuth.ensureAuth, enterpris
 
 api.get('/enterprise/:id/getEmployeeByJob', mdAuth.ensureAuth, enterpriseController.getEmployeeByJob);
 
-api.put('/enterprise/:id/setEmployee', mdAuth.ensureAuth, enterpriseController.setEmployee);
+api.post('/enterprise/:id/setEmployee', mdAuth.ensureAuth, enterpriseController.setEmployee);
 
 api.put('/enterprise/:idE/updateEmployee/:idEm',mdAuth.ensureAuth, enterpriseController.updateEmployee);
 
